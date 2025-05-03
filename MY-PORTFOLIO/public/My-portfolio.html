@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaimin Prajapati - Portfolio</title>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+<script>
+  AOS.init({
+    duration: 1000,
+    once: true,
+  });
+</script>
+
+ 
+
+  <style>
+    :root {
+      --primary-bg: #0a1a2f;
+      --primary-text: #ffffff;
+      --accent: #00bfff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: var(--primary-bg);
+      color: var(--primary-text);
+      line-height: 1.6;
+    }
+
+    #about{
+        margin: auto;
+    }
+
+    header {
+      background: #08182b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav {
+      position: relative;
+    }
+
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      height: 3px;
+      width: 25px;
+      background-color: var(--primary-text);
+      margin: 4px 0;
+      transition: all 0.3s;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(10, 26, 47, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+
+    .overlay li {
+      margin: 1rem 0;
+    }
+
+    .overlay li a {
+      font-size: 1.5rem;
+      color: var(--primary-text);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .overlay li a:hover {
+      color: var(--accent);
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .item {
+      margin-bottom: 1.5rem;
+    }
+
+    ul {
+      padding-left: 1rem;
+    }
+
+    ul li {
+      list-style: disc;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile {
+      text-align: center;
+      margin: 2rem auto;
+    }
+
+    .profile img {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+    }
+
+    a.resume-btn {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1.2s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    .certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.certificate-card {
+  background-color: #08182b;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.certificate-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 191, 255, 0.2);
+}
+
+.certificate-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.certificate-card p {
+  color: var(--primary-text);
+  font-weight: 600;
+}
+
+
+
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.85);
+  transition: opacity 0.3s ease;
+}
+
+.modal-content {
+  display: block;
+  margin: auto;
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.close {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+
+.site-footer {
+  background-color: #f8f9fa;
+  padding: 20px 10px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.footer-content h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  /* color: var(--accent); */
+  color: #0a3d62;
+}
+
+@media (max-width: 600px) {
+  .footer-content h2 {
+    font-size: 1.2rem;
+    padding: 0 10px;
+  }
+}
+
+
+
+.contact-section {
+  padding: 60px 20px;
+  background: #f5f9fc;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #0a3d62;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.info-item i {
+  color: #0077b6;
+  font-size: 1.5rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.contact-form button {
+  background-color: #0077b6;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #005f8f;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .contact-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .contact-info {
+    align-items: flex-start;
+  }
+}
+
+
+
+  </style>
+</head>
+
+
+<body>
+  <header>
+    <div class="logo"></div>
+    <nav>
+      <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </nav>
+  </header>
+
+  <div class="overlay" id="overlay">
+    <ul>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certificates">Top-Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#resume">Resume</a></li>
+    </ul>
+  </div>
+
+  <main>
+    <div class="profile">
+      <img src="My_photo.jpeg" alt="Jaimin Prajapati Profile Photo">
+    </div>
+
+    <section id="hero" style="text-align: center; margin-bottom: 3rem;">
+      <h1 style="font-size: 2.5rem; color: #ffffff;">Hi, I'm Jaimin Prajapati</h1>
+      <p style="font-size: 1.25rem; color: #00bfff;">Passionate about Project Coordinator, Scheduler & Data Analyst and Visualization.</p>
+    </section>
+
+    <section id="about" style="margin-bottom: 3rem;">
+      <h2>About Me</h2>
+      <p style="margin-bottom: 1rem;">
+        I am an IT engineer and completed my graduate degree at the Sardar Vallabhbhai Patel Institute of Technology. Now pursuing a postgraduate degree in project management in IT at Algoma University. I am passionate about project scheduler or coordinator as well as data analytics and data visualization. 
+      </p>
+      
+      
+      <p>I am actively seeking full-time opportunities. I am eager to work with innovative and diverse teams and contribute to the growth and success of the organization. I am open to new challenges and opportunities, and I am always willing to learn and improve.
+      </p>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div class="item">
+        <p><strong>Project Management in IT</strong><br>Algoma University, Brampton, ON | 2024 – 2025</p>
+      </div>
+      <div class="item">
+        <p><strong>B.E. in Information Technology</strong><br>Sardar Vallabhbhai Patel Institute of Technology, Vasad | 2019 – 2023</p>
+      </div>
+    </section>
+
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <ul>
+        <li><strong>Technical:</strong> Jira, Vibro, Smart-Sheet, Power BI, Tableau, Excel VBA, Git, GitHub, R Studio</li>
+        <li><strong>Database:</strong> SQL, MongoDB</li>
+        <li><strong>Languages:</strong> Python, R language, MERN Stack, JavaScript, HTML, CSS</li>
+        <li><strong>Soft Skills:</strong> Customer Service, Attention to detail, Leadership, Team Collaboration, Problem Solving, Multitasking</li>
+      </ul>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="item">
+        <h3>IT Helpdesk Ticketing System Implementation (Aug 2024)</h3>
+        <p><strong>Key Skills:</strong> Jira, Project Management, Scheduling, Coordination</p>
+        <ul>
+          <li> <strong>Led a team</strong> to analyze and optimize an organization's IT infrastructure using project management methodologies.</li>
+          <li>Conducted risk assessments, resource planning, and stakeholder communication to improve system efficiency.</li>
+          <li>Utilized Agile principles and Jira for task management, ensuring timely project delivery.</li>
+          <li>Delivered a comprehensive project report with recommendations for cost reduction and performance enhancement.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Android Application and Website – Farming Machine Rental (Jan 2023)</h3>
+        <p><strong>Key Skills:</strong> FullStack Development, Database Designing</p>
+        <ul>
+          <li>Developed an Android app to assist farmers in renting and borrowing machinery.</li>
+          <li>Implemented backend using Android Studio (Java) and Firebase for real-time data storage.</li>
+          <li>Built the website using HTML, CSS, Node.js, and Express.js, with MongoDB as the database for efficient data
+            handling. </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="item">
+        <h3>Data Analyst & Visualization – PIB Group (June 2023 - Dec 2023)</h3>
+        <ul>
+          <li>Provided top-tier service in data analysis and reporting using Tableau, Power BI, Excel, and cloud platforms.</li>
+          <li>Analyzed big data and delivered insights that supported business decisions.</li>
+          <li>Collaborated across departments to enhance analytical and technical efficiency.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>Project Coordinator – Arth Consultancy Services (May 2023 - June 2023)</h3>
+        <ul>
+          <li>Assisted in project planning, scheduling, and coordination for on-time execution.</li>
+          <li>Monitored project progress, reported updates, and managed stakeholder communication.</li>
+          <li>Handled documentation, task tracking, and resource management for improved efficiency.</li>
+        </ul>
+      </div>
+    </section>
+
+<div id="certificate-modal" class="modal" onclick="closeModal(event)">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-img" alt="Enlarged Certificate">
+  </div>
+  
+
+    <section id="certificates">
+        <h2>Top Certificates</h2>
+        <div class="certificates-grid">
+          <div class="certificate-card">
+            <img src="CAPM .jpg" alt="CAPM Certificate" onclick="openModal(this.src)">
+            <p>CAPM® – PMI</p>
+          </div>
+          <div class="certificate-card">
+            <img src="Scrum_Study.png" alt="Scrum Certificate" onclick="openModal(this.src)">
+            <p>SCRUMstudy Agile & Scrum (2024)</p>
+          </div>
+          <div class="certificate-card">
+            <img src="Atlassian Agile Project Management.png" alt="Atlassian Certificate" onclick="openModal(this.src)">
+            <p>Atlassian Agile Project Management (2024)</p>
+          </div>
+          <div class="certificate-card">
+            <img src="CertificateOfCompletion_Prepare for the Atlassian Managing Jira Projects ACP620 Certification.jpg" alt="Jira Certificate" onclick="openModal(this.src)">
+            <p>Managing Jira Projects (ACP-620) Prep (2024)</p>
+          </div>
+          <div class="certificate-card">
+            <img src="CertificateOfCompletion_Data Analysis with Python and Pandas.jpg" alt="Python Pandas Certificate" onclick="openModal(this.src)">
+            <p>Data Analysis with Python and Pandas (2024)</p>
+          </div>
+          <div class="certificate-card">
+            <img src="Python for Data Science & ML – Part 1 (2024).png" alt="Python ML Certificate" onclick="openModal(this.src)">
+            <p>Python for Data Science & ML – Part 1 (2024)</p>
+          </div>
+        </div>
+      </section>
+      
+
+   
+
+    <!-- <section id="contact">
+      <h2>Contact</h2>
+      <p>City: Toronto, ON</p>
+      <p>Phone: (647) 537-2795</p>
+      <p>Email: jaiminprajapati0001@gmail.com</p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/jaimin-prajapati-capm®-b579b7329" target="_blank" style="color: #00bfff;">linkedin.com/in/jaiminprajapati</a></p>
+    </section> -->
+
+    <section id="contact" class="contact-section">
+        <h2>Contact Me</h2>
+        <div class="contact-container">
+          <div class="contact-info">
+            <div class="info-item">
+              <i class="fas fa-envelope"></i>
+              <p>jaiminprajapati0001@gmail.com</p>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-phone"></i>
+              <p>+1 647 537 2795</p>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <p>Toronto, ON, Canada</p>
+            </div>
+          </div>
+          <form class="contact-form" action="http://localhost:5000/contact" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+          
+        </div>
+      </section>
+      
+      
+
+    <section id="resume">
+      <h2>Resume</h2>
+      <p>Download my resume here: <a class="resume-btn" href="Jaimin_Resume.pdf" target="_blank">Jaimin_Resume.pdf</a></p>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+          <h2>Thank you so much for visiting my Portfolio...</h2>
+        </div>
+      </footer>
+      
+  </main>
+
+  <script>
+    const mobileMenu = document.getElementById("mobile-menu");
+    const overlay = document.getElementById("overlay");
+
+    mobileMenu.addEventListener("click", () => {
+      overlay.classList.add("active");
+    });
+
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay || e.target.tagName === 'A') {
+        overlay.classList.remove("active");
+      }
+    });
+  </script>
+
+
+
+<script>
+    function openModal(imgSrc) {
+      const modal = document.getElementById("certificate-modal");
+      const modalImg = document.getElementById("modal-img");
+      modalImg.src = imgSrc;
+      modal.style.display = "block";
+    }
+  
+    function closeModal(event) {
+      const modal = document.getElementById("certificate-modal");
+      if (event.target === modal || event.target.classList.contains("close")) {
+        modal.style.display = "none";
+        document.getElementById("certificates").scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  </script>
+
+
+<script>
+  document.querySelector('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+  
+    const name = document.querySelector('#name').value;
+    const email = document.querySelector('#email').value;
+    const message = document.querySelector('#message').value;
+  
+    try {
+      const response = await fetch('http://localhost:5000/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, message })
+      });
+  
+      const result = await response.json();
+      if (result.success) {
+        alert('Your message was sent successfully!');
+        document.querySelector('form').reset();
+      } else {
+        alert('Message failed to send. Please try again later.');
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      alert('There was an error. Please try again.');
+    }
+  });
+  </script>
+  
+  
+</body>
+
+</html>
